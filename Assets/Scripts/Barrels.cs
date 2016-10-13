@@ -16,7 +16,7 @@ public class Barrels : MonoBehaviour {
 	void Update () {
 		
 		if (Input.GetKey (KeyCode.I))
-			//barrels.Play ();
+			//barrels.Play ();            
 			transform.Rotate (Vector3.left * speed * Time.deltaTime);
 		if (Input.GetKey (KeyCode.K))
 			//barrels.Play ();
