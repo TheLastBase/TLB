@@ -9,17 +9,28 @@ public class Barrels : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
-		if (Input.GetKey (KeyCode.I))
-			//barrels.Play ();            
-			transform.Rotate (Vector3.left * speed * Time.deltaTime);
-		if (Input.GetKey (KeyCode.K))
+		if (Input.GetKey (KeyCode.I)) {
 			//barrels.Play ();
-			transform.Rotate (Vector3.right * speed * Time.deltaTime);
+			if (transform.localRotation.eulerAngles.x >= 300 && transform.localRotation.eulerAngles.x <= 360 || transform.localRotation.eulerAngles.x >= -1 && transform.localRotation.eulerAngles.x <= 13) {
+				transform.Rotate (Vector3.left * speed * Time.deltaTime);
+				Vector3 currentRotation = transform.localRotation.eulerAngles;
+				Debug.Log ("Omhoog: " + currentRotation);
+			}
+		
+		}
+
+		if (Input.GetKey (KeyCode.K)) {
+			//barrels.Play ();
+			if (transform.localRotation.eulerAngles.x >= 298 && transform.localRotation.eulerAngles.x <= 360 || transform.localRotation.eulerAngles.x >= -1 && transform.localRotation.eulerAngles.x <= 12) {
+				transform.Rotate (Vector3.right * speed * Time.deltaTime);
+				Vector3 currentRotation = transform.localRotation.eulerAngles;
+				Debug.Log ("Omlaag: " + currentRotation);
+			}
+		}
 	}
 }

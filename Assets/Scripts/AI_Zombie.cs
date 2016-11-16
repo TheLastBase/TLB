@@ -9,38 +9,34 @@ public class AI_Zombie : MonoBehaviour {
 	public int rotationSpeed;
 	public Animator animator;
 	private bool alive;
-	//public Collider hitbox;
 	//public Collider aliveCollider;
 	//public Collider deadCollider;
 	public Transform myTransfrom;
-	public Transform parent;
 	public Text counter;
+	public Collider zombieCollider;
+	public Collider terrainCollider;
+	private Random random;
 
 	// Use this for initialization
 	void Start () {
-		counter = GetComponent<Text> ();
 		alive = true;
-		//hitbox.enabled = true;
-		//aliveCollider.enabled = false;
-		//deadCollider.enabled = false;
-		int counterInt = parent.childCount;
-		counter.text = (counterInt.ToString ());
+		animator.SetFloat ("Random", Random.Range(0.0f,2.0f));
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		//Physics.IgnoreCollision (terrainCollider, zombieCollider);
 		if (alive == true) {
 			myTransfrom.rotation = Quaternion.Slerp (myTransfrom.rotation, Quaternion.LookRotation (target.position - myTransfrom.position), rotationSpeed * Time.deltaTime);
 			myTransfrom.position += myTransfrom.forward * moveSpeed * Time.deltaTime;
-			//aliveCollider.enabled = true;
-			//deadCollider.enabled = false;
 		}
 	}
 
 	void OnTriggerEnter (Collider other){
+		if (other.gameObject.name == "Shell(Clone)"){
+		Debug.Log ("Collided with " + other.gameObject.name);
 		animator.SetTrigger ("Hit");
 		alive = false;
-		//aliveCollider.enabled = true;
-		//deadCollider.enabled = false;
+		}
 	}
 }
